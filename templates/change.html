@@ -1,0 +1,136 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Nurture Bet</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!-- Your custom styles (optional) -->
+
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" >
+    <link rel="stylesheet" href="{% static "css/mdb.min.css" %}" >
+
+</head>
+
+<body class="fixed-sn white-skin">
+
+
+    <!--Main layout-->
+    <main style="padding-top:1em !important">
+        <div class="container-fluid">
+
+<h1 class="display-3 white-text mb-5 wow fadeInDown" data-wow-delay="0.3s" style="text-align: center;color: #33b5e5 !important;">IPL Fever</h1>
+
+            <div style="height: 5px"></div>
+
+        
+ <style type="text/css">
+     
+
+.form-elegant .font-small {
+  font-size: 0.8rem; }
+
+.form-elegant .z-depth-1a {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+  box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25); }
+
+.form-elegant .z-depth-1-half,
+.form-elegant .btn:hover {
+  -webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+  box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15); }
+                
+
+
+ </style>
+
+                <div class="row justify-content-md-center">
+                    <div class="col-xl-5 col-md-5 mb-4">
+
+<section class="form-elegant">
+
+    <!--Form without header-->
+    <div class="card">
+
+        <div class="card-body mx-4">
+            <form action="/changePasswordSubmit/" method="POST">
+            <!--Header-->
+            <div class="text-center">
+                <h3 class="dark-grey-text mb-5"><strong> Change Password</strong></h3>
+            </div>
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %}
+            <!--Body-->
+            <div class="md-form">
+                <input type="text" name="userName" id="Form-email1" class="form-control">
+                <label for="Form-email1">User</label>
+            </div>
+
+            <div class="md-form pb-3">
+                <input type="password" name="oldPwd" id="Form-pass1" class="form-control">
+                <label for="Form-pass1">Old Password</label>
+              
+            </div>
+            <div class="md-form pb-3">
+                <input type="password" name="newPwd1" id="Form-pass2" class="form-control">
+                <label for="Form-pass2">New Password</label>
+              
+            </div>
+            <div class="md-form pb-3">
+                <input type="password" name="newPwd2" id="Form-pass3" class="form-control">
+                <label for="Form-pass3">Re-enter New Password</label>
+              
+            </div>                        
+            <br>
+
+            <div class="text-center mb-3">
+                <input type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a" value="Change"></input>
+            </div>
+            </form>
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer mx-5 pt-3 mb-1">
+            <p class="font-small grey-text d-flex justify-content-end"><a href="/ipl" class="blue-text ml-1">Login</a></p>
+        </div>
+
+    </div>
+    <!--/Form without header-->
+
+</section>
+            
+
+</div>
+</div>
+
+
+
+
+
+</div>
+
+
+
+            </div>
+    </main>
+    <!--Main layout-->
+
+
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script src="{% static "./js/jquery-3.2.1.min.js" %}"></script>
+    <script src="{% static "./js/bootstrap.js" %}"></script>
+    <script src="{% static "./js/mdb.min.js" %}"></script>
+
+
+</body>
+
+</html>

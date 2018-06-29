@@ -1,0 +1,148 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Nurture Bet</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!-- Your custom styles (optional) -->
+
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" >
+    <link rel="stylesheet" href="{% static "css/mdb.min.css" %}" >
+
+
+
+    <style>
+        .hg{
+            min-height: 350px;
+            max-height: 350px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body class="fixed-sn white-skin">
+
+
+    <!--Main layout-->
+    <main class="padding-top:2rem !important">
+        <div class="container-fluid">
+
+<h1 class="display-3 white-text mb-5 wow fadeInDown" data-wow-delay="0.3s" style="text-align: center;color: #33b5e5 !important;">Hey {{user_id}},Lets Bet!
+
+<a class="white-text font-weight-bold" style="color: #28a745 !important;">
+    <h6 class="white-text font-weight-bold" style="color: #dc3545 !important;">
+        (No, Log out)</h6></a>
+<a class="white-text font-weight-bold" style="color: #28a745 !important;" href="/bettingHistory/">
+    <h6 class="white-text font-weight-bold" style="color: #dc3545 !important;">
+Click here to see your betting history</h6>
+    </a></h1>
+
+            <div style="height: 5px"></div>
+
+
+            <!--Section: Cascading panels-->
+            <section class="mb-3">
+
+                <!--Grid row-->
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-12 mb-4">
+
+                        <!--Panel-->
+                        <div class="card hg">
+                            <div class="card-header white-text primary-color">
+                                Your Betting History
+                            </div>
+                            <!--/.Card-->
+                            <div class="card-body pt-0 px-1">
+
+                                <!--Card content-->
+                                <div class="card-body text-center">
+
+                                    <table class="table">
+
+
+                            <!--Table body-->
+                            <tbody>
+                            {%for bet in betting_details%}
+                                <tr>
+                                    <td>{{bet.team1}} Vs {{bet.team2}}</td>
+                                    {% if bet.team == bet.result %}
+                                    <td>WON</td>
+                                    {%elif bet.result == "" %}
+                                    <td>YET TO PLAY</td>
+                                    {%else%}
+                                    <td>LOST</td>
+                                    {% endif %}
+                                </tr>
+                            {%endfor%}
+
+                            </tbody>
+                            <!--Table body-->
+                        </table>
+
+                                </div>
+                                <!--/.Card content-->
+
+                            </div>
+                            <!--/.Card-->
+
+                        </div>
+                        <!--Panel-->
+
+                    </div>
+                    <!--Grid column-->
+            </section>
+            <!--Section: Cascading panels-->
+
+
+
+
+
+
+   <!--Card-->
+
+    <!--/.Card-->
+</div>
+
+
+
+
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    <footer class="page-footer pt-0 mt-5 rgba-stylish-light">
+
+        <!--Copyright-->
+        <div class="footer-copyright py-3 text-center">
+              <div class="container-fluid">Nurture Hack
+            </div>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
+    <!--/.Footer-->
+
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script src="{% static "./js/jquery-3.2.1.min.js" %}"></script>
+    <script src="{% static "./js/bootstrap.js" %}"></script>
+    <script src="{% static "./js/mdb.min.js" %}"></script>
+
+
+
+
+
+</body>
+
+</html>

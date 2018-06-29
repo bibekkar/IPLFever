@@ -1,0 +1,462 @@
+{% load static%}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Nurture Bet</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <!-- Your custom styles (optional) -->
+
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" >
+    <link rel="stylesheet" href="{% static "css/mdb.min.css" %}" >
+
+
+
+    <style>
+        .hg{
+            min-height: 350px;
+            max-height: 350px;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body class="fixed-sn white-skin">
+
+
+    <!--Main layout-->
+    <main class="padding-top:2rem !important">
+        <div class="container-fluid">
+
+<h1 class="display-3 white-text mb-5 wow fadeInDown" data-wow-delay="0.3s" style="text-align: center;color: #33b5e5 !important;">Hey {{user_id}},Lets Bet!
+
+<a class="white-text font-weight-bold" href="/ipl/" style="color: #28a745 !important;">
+    <h6 class="white-text font-weight-bold" style="color: #dc3545 !important;">
+        (Log out)</h6></a>
+<!--<a class="white-text font-weight-bold" style="color: #28a745 !important;" href="/bettingHistory/">-->
+    <!--<h6 class="white-text font-weight-bold" style="color: #dc3545 !important;">-->
+<!--Click here to see your betting history</h6>-->
+    <!--</a>-->
+</h1>
+            {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %}
+
+            <div style="height: 5px"></div>
+
+        
+            <!--Section: Cascading panels-->
+            <section class="mb-3">
+
+                <!--Grid row-->
+                <div class="row">
+
+
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+
+                        <!--Card-->
+                        <div class="card card-cascade cascading-admin-card">
+
+                            <!--Card Data-->
+                            <div class="admin-up">
+                                <i class="fa fa-beer warning-color-dark"></i>
+                                <div class="data">
+                                    <p>Your Credits</p>
+                                    <h4 class="font-weight-bold dark-grey-text">{{creditData.0.totalAmount}}</h4>
+                                </div>
+                            </div>
+                            <!--/.Card Data-->
+
+                            <!--Card content-->
+                            <div class="card-body">
+                                <!--Text-->
+                                <p class="card-text"></p>
+                            </div>
+                            <!--/.Card content-->
+
+                        </div>
+                        <!--/.Card-->
+                        <br>
+                        <!--Card-->
+                        <div class="card card-cascade cascading-admin-card">
+
+                            <!--Card Data-->
+                            <div class="admin-up">
+                                <i class="fa fa-star warning-color-dark"></i>
+                                <div class="data">
+                                    <p>Your Rank</p>
+                                    {%for lead in leaderData%}
+                                        {%if user_id|stringformat:"s" == lead.user_id %}
+                                    <h4 class="font-weight-bold dark-grey-text">{{forloop.counter}}</h4>
+                                        {%endif%}
+                                    {%endfor%}
+                                </div>
+                            </div>
+                            <!--/.Card Data-->
+
+                            <!--Card content-->
+                            <div class="card-body">
+                                <!--Text-->
+                                <p class="card-text"></p>
+                            </div>
+                            <!--/.Card content-->
+
+                        </div>
+                        <!--/.Card-->
+
+                    </div>
+
+
+
+
+
+
+
+                    <!--Grid column-->
+                    <div class="col-lg-5 col-md-12 mb-4">
+
+                        <!--Panel-->
+                        <div class="card hg">
+                            <div class="card-header white-text secondary-color">
+                                Leader Board
+                            </div>
+                            <!--/.Card-->
+                            <div class="card-body pt-0 px-1">
+
+                                <!--Card content-->
+                                <div class="card-body text-center">
+
+                                    <table class="table">
+
+                            <!--Table head-->
+                            <thead class="blue-grey lighten-4">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Name</th>
+                                    <th>Credits</th>
+                                    <th>Bets</th>
+                                </tr>
+                            </thead>
+                            <!--Table head-->
+
+                            <!--Table body-->
+                            <tbody>
+                                {% for lead in leaderData%}
+                                <tr>
+                                    <th scope="row">{{forloop.counter}}</th>
+                                    <td>{{lead.user_id}}</td>
+                                    <td>{{lead.tAmount}}</td>
+                                    <td>{{lead.teamCount}}</td>
+                                </tr>
+
+                                   {%endfor%}
+                                </tr>
+                            </tbody>
+                            <!--Table body-->
+                        </table>
+
+                                </div>
+                                <!--/.Card content-->
+
+                            </div>
+                            <!--/.Card-->
+
+                        </div>
+                        <!--Panel-->
+
+                    </div>
+                    <!--Grid column-->
+                    <!--Grid column-->
+
+                    <div class="col-lg-4 col-md-12 mb-4">
+
+                        <!--Panel-->
+                        <div class="card hg">
+                            <div class="card-header white-text primary-color">
+                                Your Betting History
+                            </div>
+                            <!--/.Card-->
+                            <div class="card-body pt-0 px-1">
+
+                                <!--Card content-->
+                                <div class="card-body text-center">
+
+                                    <table class="table">
+
+
+                            <!--Table body-->
+                            <tbody>
+                            {%for bet in betting_details%}
+                                <tr>
+                                    <td>{{bet.team1}} Vs {{bet.team2}}</td>
+                                    <td>{{bet.result}}</td>
+                                </tr>
+                            {%endfor%}
+
+                            </tbody>
+                            <!--Table body-->
+                        </table>
+
+                                </div>
+                                <!--/.Card content-->
+
+                            </div>
+                            <!--/.Card-->
+
+                        </div>
+                        <!--Panel-->
+
+                    </div>
+                    <!--Grid column-->                    
+            </section>
+            <!--Section: Cascading panels-->
+<script type="text/javascript">
+     var d = new Date();
+    var n = d.getHours();
+</script>
+
+<div class="row">
+    
+{%for match in match_details%}
+
+<div class="col-lg-4 col-md-12 mb-4">
+    <!--Card-->
+
+    <div class="card card-cascade narrower">
+        <!--Card image-->
+        <div class="view gradient-card-header purple-gradient">
+            <h2 class="h2-responsive">Match {{ forloop.counter }}</h2>
+            <p>{{match.team1}} vs {{match.team2}}</p>
+            <p>{{today_date}}</p>
+            <div class="text-center"> </div>
+        </div>
+        <!--/Card image-->
+        <!--Card content-->
+        <div class="card-body text-center"> <canvas id="barChart{{ forloop.counter0 }}" height="200px"></canvas><br>
+            <form class="form-inline text-center ml-5 pl-5" method ="POST" action ="/submitbet{{ forloop.counter }}/">
+                <div class="form-check"> <input class="form-check-input warning-color-dark" type="radio" name="exampleRadios{{ forloop.counter }}" id="exampleRadiosInline1_{{ forloop.counter }}" value={{match.team1}} checked> <label class="form-check-label" for="exampleRadiosInline1_{{ forloop.counter }}">
+            {{match.team1}}
+        </label> </div>
+                <div class="form-check"> <input class="form-check-input" type="radio" name="exampleRadios{{ forloop.counter }}" id="exampleRadiosInline2_{{ forloop.counter }}" value={{match.team2}}>
+                    <label class="form-check-label" for="exampleRadiosInline2_{{ forloop.counter }}">
+                        {{match.team2}}
+                        </label>
+                </div>
+                <input type="hidden" name="matchId_{{ forloop.counter }}" id ="matchId_{{ forloop.counter }}" value={{match.id}}>
+                <input type="submit" class="btn btn-pink btn-rounded waves-effect waves-light" value="Place Bet"></input>
+            </form>
+            <!--<button type="submit" onclick="submitFunc()" class="btn btn-pink btn-rounded waves-effect waves-light">Place</button>-->
+            <br>  </div>
+        <!--/.Card content-->
+    </div>
+    <!--/.Card-->
+</div>
+
+{%endfor%}
+
+{%if user_type == 2%}
+{%for match in match_details%}
+<div class="col-lg-4 col-md-12 mb-4">
+    <!--Card-->
+
+    <div class="card card-cascade narrower">
+        <!--Card image-->
+        <div class="view gradient-card-header purple-gradient">
+            <h2 class="h2-responsive">Match {{ forloop.counter }}</h2>
+            <p>{{match.team1}} vs {{match.team2}}</p>
+            <p>{{today_date}}</p>
+            <div class="text-center"> </div>
+        </div>
+        <!--/Card image-->
+        <!--Card content-->
+        <div class="card-body text-center">
+            <form class="form-inline text-center ml-5 pl-5" method ="POST" action ="/updateResult{{ forloop.counter }}/">
+                <div class="form-check"> <input class="form-check-input warning-color-dark" type="radio" name="exampleRadiosUp{{ forloop.counter }}" id="exampleRadiosInlineUp1_{{ forloop.counter }}" value={{match.team1}} checked> <label class="form-check-label" for="exampleRadiosInlineUp1_{{ forloop.counter }}">
+            {{match.team1}}
+        </label> </div>
+                <div class="form-check"> <input class="form-check-input" type="radio" name="exampleRadiosUp{{ forloop.counter }}" id="exampleRadiosInlineUp2_{{ forloop.counter }}" value={{match.team2}}>
+                    <label class="form-check-label" for="exampleRadiosInlineUp2_{{ forloop.counter }}">
+                        {{match.team2}}
+                        </label>
+                </div>
+                <input type="hidden" name="matchIdUp_{{ forloop.counter }}" id ="matchIdUp_{{ forloop.counter }}" value={{match.id}}>
+                <input type="submit" class="btn btn-pink btn-rounded waves-effect waves-light" value="Update"></input>
+            </form> <br>  </div>
+        <!--/.Card content-->
+    </div>
+    <!--/.Card-->
+</div>
+{%endfor%}
+{%endif%}
+
+            </div>
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    <footer class="page-footer pt-0 mt-5 rgba-stylish-light">
+
+        <!--Copyright-->
+        <div class="footer-copyright py-3 text-center">
+              <div class="container-fluid">Nurture Hack
+            </div>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
+    <!--/.Footer-->
+
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script src="{% static "./js/jquery-3.2.1.min.js" %}"></script>
+    <script src="{% static "./js/bootstrap.js" %}"></script>
+    <script src="{% static "./js/mdb.min.js" %}"></script>
+
+
+<script type="text/javascript">
+
+        //bar
+        var ctxB = document.getElementById("barChart0").getContext('2d');
+
+        var voteteam1 =  '{{chart_data.0.0.team}}';
+        var matchTeam1 = '{{match_details.0.team1}}';
+        var matchTeam2 = '{{match_details.0.team2}}';
+
+        if(voteteam1 == matchTeam2)
+        {
+        var actTeam = voteteam1;
+        var dataList = [{{chart_data.0.1.dcount}} , {{chart_data.0.0.dcount}},0]
+        }
+        else
+        {
+        var dataList = [{{chart_data.0.0.dcount}} , {{chart_data.0.1.dcount}},0]
+        }
+
+        var myBarChart = new Chart(ctxB, {
+            type: 'bar',
+            data: {
+                labels: ['{{match_details.0.team1}}','{{match_details.0.team2}}'],
+                datasets: [{
+                    label: '# of Votes',
+                    <!--data: [ {{chart_data.0.0.dcount}}, {{chart_data.0.1.dcount}},0],-->
+                    data: dataList,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            optionss: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+ var ctxB1 = document.getElementById("barChart1").getContext('2d');
+
+ var voteteam1 =  '{{chart_data.1.0.team}}';
+        var matchTeam1 = '{{match_details.1.team1}}';
+        var matchTeam2 = '{{match_details.1.team2}}';
+
+        if(voteteam1 == matchTeam2)
+        {
+        var actTeam = voteteam1;
+        var dataList = [{{chart_data.1.1.dcount}} , {{chart_data.1.0.dcount}},0]
+        }
+        else
+        {
+        var dataList = [{{chart_data.1.0.dcount}} , {{chart_data.1.1.dcount}},0]
+        }
+
+        var myBarChart1 = new Chart(ctxB1, {
+            type: 'bar',
+            data: {
+                labels: ['{{match_details.1.team1}}','{{match_details..team2}}'],
+                datasets: [{
+                    label: '# of Votes',
+                    <!--data: [ {{chart_data.1.0.dcount}}, {{chart_data.1.1.dcount}},0],-->
+                    data: dataList,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            optionss: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+function submitFunc(){
+alert('hi');
+var exampleRadios1 = document.getElementById("exampleRadiosInline1_1");
+var matchId_1 = document.getElementById("matchId_1");
+console.log(exampleRadios1);
+console.log(matchId_1);
+
+$.ajax({
+        url: 'submitbet1/',
+        data: {
+        'exampleRadios1':exampleRadios1,
+        'matchId_1':matchId_1},
+        dataType: 'json',
+        success: function (data) {
+          if (data.success) {
+            alert(data.message);
+          }
+        }
+      });
+}
+</script>
+
+
+
+</body>
+
+</html>
